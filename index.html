@@ -475,10 +475,14 @@
     }
 
 
-    function abrirCarta() {
-      trocarTela("carta");
-    }
+    function abrirCarta(){
+    const musica = document.getElementById("musica");
 
+    musica.volume = 0.4;
+    musica.play();
+
+    trocarTela("carta");
+    }
 
     function abrirQuiz() {
       perguntaAtual = 0;
