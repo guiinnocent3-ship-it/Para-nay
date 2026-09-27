@@ -12,11 +12,7 @@
       padding: 0;
     }
 
-    body
-      <audio id="musica" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
-        
+    body {
       font-family: "Segoe UI", Arial, sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
@@ -208,6 +204,12 @@
 
 <body>
 
+  <!-- MÚSICA -->
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+
   <!-- =========================
        TELA INICIAL
        ========================= -->
@@ -218,7 +220,6 @@
 
         <div class="coracao">❤️</div>
 
-        <!-- Para Nay👑💙 -->
         <h1>Ei cabeçuda, Nay💙🤭...</h1>
 
         <p>
@@ -266,7 +267,7 @@
           <p>
             saiba que nao precisa guardar tudo pra você os seus problemas,
             mas sabia que não precisa carregar tudo isso sozinha.
-            eu to aqui nos momentos ruins e bons ah todo momento das nossas vidas 
+            eu to aqui nos momentos ruins e bons ah todo momento das nossas vidas
           </p>
 
           <p>
@@ -390,14 +391,6 @@
 
   <script>
 
-    /*
-    ==========================================
-    QUIZ
-    ==========================================
-
-    VOCÊ PODE ALTERAR AS PERGUNTAS AQUI.
-    */
-
     const perguntas = [
 
       {
@@ -475,9 +468,20 @@
     }
 
 
-    function abrirCarta(){
-    trocarTela("carta");
+    // COMEÇA A MÚSICA QUANDO ELA CLICAR NA SURPRESA
+    function abrirCarta() {
+
+      const musica = document.getElementById("musica");
+
+      musica.volume = 0.4;
+
+      musica.play().catch(() => {
+        console.log("O navegador bloqueou a reprodução da música.");
+      });
+
+      trocarTela("carta");
     }
+
 
     function abrirQuiz() {
       perguntaAtual = 0;
@@ -573,11 +577,637 @@
     }
 
 
-    /*
-    ==========================================
-    CORAÇÕES ANIMADOS
-    ==========================================
-    */
+    function criarCoracao() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const emojis = ["💙", "💗", "🫂", "🌺", "💘"];
+
+      heart.innerText =
+        emojis[Math.floor(Math.random() * emojis.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+      heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 9000);
+
+    }
+
+
+    function criarCoracoes() {
+
+      for (let i = 0; i < 30; i++) {
+
+        setTimeout(() => {
+          criarCoracao();
+        }, i * 150);
+
+      }
+
+    }
+
+
+    setInterval(() => {
+
+      if (Math.random() > 0.45) {
+        criarCoracao();
+      }
+
+    }, 1500);
+
+  </script>
+
+</body>
+            </html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para nayra ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #160b18, #3b102d, #651b43);
+      color: white;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tela {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tela.ativa {
+      display: flex;
+    }
+
+    .card {
+      width: 100%;
+      padding: 35px 25px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      animation: aparecer 0.8s ease;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: 1.7rem;
+    }
+
+    p {
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+    }
+
+    .coracao {
+      font-size: 4rem;
+      animation: pulsar 1.5s infinite;
+      margin-bottom: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 50px;
+      padding: 14px 25px;
+      margin-top: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #ff4f91, #ff1f68);
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,31,104,0.35);
+      transition: 0.25s;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .mensagem {
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    .pergunta {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .opcoes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .opcao {
+      width: 100%;
+      margin: 0;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: none;
+    }
+
+    .opcao:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    #feedback {
+      margin-top: 20px;
+      min-height: 30px;
+      font-weight: bold;
+    }
+
+    .final {
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .assinatura {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      font-size: 20px;
+      animation: subir linear forwards;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulsar {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes subir {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.45rem;
+      }
+
+      .card {
+        padding: 28px 18px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MÚSICA -->
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <!-- =========================
+       TELA INICIAL
+       ========================= -->
+
+  <section class="tela ativa" id="inicio">
+    <div class="container">
+      <div class="card">
+
+        <div class="coracao">❤️</div>
+
+        <h1>Ei cabeçuda, Nay💙🤭...</h1>
+
+        <p>
+          Eu sei que você não está tendo um dos melhores dias,
+          então preparei uma pequena surpresa para você.
+        </p>
+
+        <p>
+          Não é algo enorme, mas foi feito pensando em você. 🥹
+        </p>
+
+        <button onclick="abrirCarta()">
+          Abrir minha surpresa 💌
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================
+       CARTA
+       ========================= -->
+
+  <section class="tela" id="carta">
+    <div class="container">
+      <div class="card">
+
+        <div class="coracao">💗</div>
+
+        <h2>Uma coisinha que eu queria te dizer...</h2>
+
+        <div class="mensagem">
+
+          <p>
+            Minha nay,
+          </p>
+
+          <p>
+            Se você está lendo isso é um momento que está triste,
+            eu queria poder estar aí agora para te dar um abraço bem apertado
+            e fazer você esquecer um pouquinho tudo aquilo que está te deixando pra baixo.
+          </p>
+
+          <p>
+            saiba que nao precisa guardar tudo pra você os seus problemas,
+            mas sabia que não precisa carregar tudo isso sozinha.
+            eu to aqui nos momentos ruins e bons ah todo momento das nossas vidas
+          </p>
+
+          <p>
+            Eu espero que você nunca se esqueça do quanto é especial,
+            importante e querida.
+          </p>
+
+          <p>
+            E mesmo nos dias em que você não estiver se sentindo bem,
+            mesmo quando achar que está tudo dando errado,
+            ainda vai existir alguém aqui torcendo pelo seu sorriso.
+          </p>
+
+          <p>
+            Eu gosto de você nos dias felizes e agitada,
+            mas também quero estar perto nos dias difíceis.
+          </p>
+
+          <p>
+            Então respira fundo, tá?
+            Essa fase ruim vai passar.
+          </p>
+
+          <p>
+            E enquanto ela não passa,
+            deixa eu to aqui com você. ❤️
+          </p>
+
+        </div>
+
+        <button onclick="abrirQuiz()">
+          Agora vem uma brincadeirinha 👀
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================
+       QUIZ
+       ========================= -->
+
+  <section class="tela" id="quiz">
+    <div class="container">
+      <div class="card">
+
+        <div class="coracao">🥰</div>
+
+        <h2>Quiz do nosso amor</h2>
+
+        <p id="contador"></p>
+
+        <div class="pergunta" id="pergunta"></div>
+
+        <div class="opcoes" id="opcoes"></div>
+
+        <div id="feedback"></div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================
+       FINAL
+       ========================= -->
+
+  <section class="tela" id="final">
+    <div class="container">
+      <div class="card">
+
+        <div class="coracao">💖</div>
+
+        <h1>Chegamos ao final...</h1>
+
+        <div class="final">
+
+          <p>
+            E agora eu só queria que você lembrasse de uma coisa:
+          </p>
+
+          <p>
+            <strong>
+              Você é muito especial para mim.
+            </strong>
+          </p>
+
+          <p>
+            Não importa como tenha sido seu dia,
+            nem quantas coisas estejam passando pela sua cabeça.
+          </p>
+
+          <p>
+            Eu espero que esse pequeno gesto tenha conseguido
+            arrancar pelo menos um sorrisinho seu. 🥹❤️
+          </p>
+
+          <p>
+            E se conseguiu, então já valeu a pena fazer tudo isso.
+          </p>
+
+          <p>
+            Eu te lobo nay. ❤️
+          </p>
+
+          <div class="assinatura">
+            Feito especialmente pra você minha dama💌
+          </div>
+
+        </div>
+
+        <button onclick="voltarCarta()">
+          Ler minha cartinha novamente ❤️
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+
+    const perguntas = [
+
+      {
+        pergunta: "Quando você estiver triste, o que mais quer fazer?",
+        opcoes: [
+          "Me bater 😭",
+          "Tomar açaí comigo😛",
+          "Ficar     sozinha",
+          "Jogar um pouquinho 😂"
+        ],
+        correta: 1
+      },
+
+      {
+        pergunta: "O que eu mais quero ver no seu rosto?",
+        opcoes: [
+          "Uma cara de brava 😡",
+          "Um sorriso seu 🥹❤️",
+          "Uma cara de sono 😴",
+          "Uma cara de sonsa😂"
+        ],
+        correta: 2
+      },
+
+      {
+        pergunta: "Se você tiver um dia ruim, o que eu quero que você lembre?",
+        opcoes: [
+          "Que você é o amor da minha vida",
+          "Que ninguém se importa",
+          "Que pode contar comigo ❤️",
+          "Que precisa esconder o que sente"
+        ],
+        correta: 1
+      },
+
+      {
+        pergunta: "Qual dessas coisas eu escolheria?",
+        opcoes: [
+          "Ver você feliz ❤️",
+          "Ganhar uma discussão 😂",
+          "Ficar sem falar com você",
+          "Te deixar triste"
+        ],
+        correta: 1
+      },
+
+      {
+        pergunta: "E qual é a coisa mais importante dessa página?",
+        opcoes: [
+          "O quiz",
+          "As animações",
+          "Você ❤️",
+          "O botão"
+        ],
+        correta: 3
+      }
+
+    ];
+
+    let perguntaAtual = 0;
+
+
+    function trocarTela(id) {
+
+      document.querySelectorAll(".tela").forEach(tela => {
+        tela.classList.remove("ativa");
+      });
+
+      document.getElementById(id).classList.add("ativa");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    // COMEÇA A MÚSICA QUANDO ELA CLICAR NA SURPRESA
+    function abrirCarta() {
+
+      const musica = document.getElementById("musica");
+
+      musica.volume = 0.4;
+
+      musica.play().catch(() => {
+        console.log("O navegador bloqueou a reprodução da música.");
+      });
+
+      trocarTela("carta");
+    }
+
+
+    function abrirQuiz() {
+      perguntaAtual = 0;
+      trocarTela("quiz");
+      mostrarPergunta();
+    }
+
+
+    function mostrarPergunta() {
+
+      const pergunta = perguntas[perguntaAtual];
+
+      document.getElementById("contador").innerText =
+        `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+
+      document.getElementById("pergunta").innerText =
+        pergunta.pergunta;
+
+      const opcoes = document.getElementById("opcoes");
+
+      opcoes.innerHTML = "";
+
+      document.getElementById("feedback").innerText = "";
+
+      pergunta.opcoes.forEach((opcao, indice) => {
+
+        const botao = document.createElement("button");
+
+        botao.className = "opcao";
+        botao.innerText = opcao;
+
+        botao.onclick = () => responder(indice);
+
+        opcoes.appendChild(botao);
+
+      });
+    }
+
+
+    function responder(indice) {
+
+      const pergunta = perguntas[perguntaAtual];
+
+      const feedback = document.getElementById("feedback");
+
+      if (indice === pergunta.correta) {
+
+        feedback.innerText = "Acertou craduda! 🥹❤️";
+
+      } else {
+
+        feedback.innerText = "Hmm... mas eu ainda te amo 😂❤️";
+
+      }
+
+      document.querySelectorAll(".opcao").forEach(botao => {
+        botao.disabled = true;
+        botao.style.opacity = "0.7";
+      });
+
+      setTimeout(() => {
+
+        perguntaAtual++;
+
+        if (perguntaAtual < perguntas.length) {
+
+          mostrarPergunta();
+
+        } else {
+
+          finalizarQuiz();
+
+        }
+
+      }, 1200);
+
+    }
+
+
+    function finalizarQuiz() {
+
+      trocarTela("final");
+
+      criarCoracoes();
+
+    }
+
+
+    function voltarCarta() {
+
+      trocarTela("carta");
+
+    }
+
 
     function criarCoracao() {
 
@@ -621,11 +1251,6 @@
     }
 
 
-    /*
-    Corações discretos aparecendo
-    durante o site inteiro.
-    */
-
     setInterval(() => {
 
       if (Math.random() > 0.45) {
@@ -637,5 +1262,4 @@
   </script>
 
 </body>
-        </html>
-        
+</html>
