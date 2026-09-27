@@ -1,0 +1,117 @@
+Para a Nay ❤️* {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+min-height: 100vh;
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg, #ff9eb5, #ffd6e3, #fff0f5);
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+overflow-x: hidden;
+}
+.card {
+width: 100%;
+max-width: 520px;
+background: rgba(255,255,255,0.96);
+padding: 30px;
+border-radius: 28px;
+text-align: center;
+box-shadow: 0 15px 50px rgba(120,30,70,0.25);
+animation: aparecer 1s ease;
+}
+@keyframes aparecer {
+from {
+opacity: 0;
+transform: translateY(25px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.coracao {
+font-size: 65px;
+animation: pulsar 1.3s infinite;
+}
+@keyframes pulsar {
+50% {
+transform: scale(1.15);
+}
+}
+h1 {
+color: #e75480;
+font-size: 34px;
+margin-bottom: 10px;
+}
+h2 {
+color: #d94370;
+}
+p {
+color: #63303f;
+font-size: 17px;
+line-height: 1.6;
+}
+button {
+border: none;
+background: #e75480;
+color: white;
+padding: 14px 23px;
+margin: 8px;
+border-radius: 30px;
+font-size: 16px;
+cursor: pointer;
+transition: 0.2s;
+}
+button:hover {
+transform: scale(1.06);
+background: #d94370;
+}
+.pergunta {
+display: none;
+margin-top: 25px;
+}
+.pergunta.ativa {
+display: block;
+animation: aparecer 0.5s ease;
+}
+#final {
+display: none;
+animation: aparecer 0.8s ease;
+}
+.mensagem-final {
+background: #fff0f5;
+padding: 22px;
+border-radius: 20px;
+margin-top: 20px;
+}
+.emoji {
+font-size: 30px;
+}
+.pequeno {
+font-size: 14px;
+opacity: 0.7;
+}
+/* Corações flutuando */
+.coracao-flutuante {
+position: fixed;
+bottom: -30px;
+font-size: 22px;
+animation: subir 5s linear forwards;
+pointer-events: none;
+}
+@keyframes subir {
+from {
+transform: translateY(0);
+opacity: 1;
+}
+to {
+transform: translateY(-110vh);
+opacity: 0;
+}
+}
+❤️Para você, Nay
+Oi, Nay... 🥺
+E
